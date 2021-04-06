@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Options = ({ children }) => {
+const Options = () => {
   const [idToCall, setIdToCall] = useState('')
   const [waiting, setWaiting] = useState(false)
   const classes = useStyles()
@@ -54,6 +54,7 @@ const Options = ({ children }) => {
     if(idToCall === "") {
       alert('Please input your ID')
     } else {
+      setWaiting(true)
       return callUser(idToCall)
     }
   }
@@ -85,10 +86,7 @@ const Options = ({ children }) => {
                 onChange={(e) => setName(e.target.value)}
                 fullWidth
               />
-              {name === "" 
-                ? null
-                : 
-                <CopyToClipboard text={me} className={classes.margin}>
+              <CopyToClipboard text={me} className={classes.margin}>
                   <Button 
                     variant="contained" 
                     color="primary" 
@@ -98,7 +96,6 @@ const Options = ({ children }) => {
                     Copy Your ID
                   </Button>
                 </CopyToClipboard>
-              }
             </Grid>
             <Grid 
               item 
@@ -130,18 +127,17 @@ const Options = ({ children }) => {
                 <Button
                   variant="contained" 
                   color="primary" 
-                  startIcon={<Phone fontSize="large"/>} 
+                  startIcon={waiting ? null : <Phone fontSize="large"/>} 
                   fullWidth 
                   onClick={() => handleCall(idToCall)}
                   className={classes.margin}
                 >
-                  Call
+                  {waiting ? 'Please Wait...' : 'Call'}
                 </Button>
               )}
             </Grid>
           </Grid>
         </form>
-        {children}
       </Paper>
     </Container>
   )
