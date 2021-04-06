@@ -19,7 +19,8 @@ const Notifications = () => {
           <Button 
             variant="contained" 
             color="secondary" 
-            onClick={declineCall}>
+            onClick={declineCall}
+          >
             Decline
           </Button>
         </div>

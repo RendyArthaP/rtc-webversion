@@ -46,8 +46,9 @@ const App = () => {
         </Typography>
       </AppBar>
       <VideoPlayer />
-      <Options />
-      <Notifications />
+      <Options>
+        <Notifications />
+      </Options>
     </div>
   )
 }

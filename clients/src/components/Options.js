@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Options = () => {
+const Options = ({ children }) => {
   const [idToCall, setIdToCall] = useState('')
   const [waiting, setWaiting] = useState(false)
   const classes = useStyles()
@@ -138,6 +138,7 @@ const Options = () => {
             </Grid>
           </Grid>
         </form>
+        {children}
       </Paper>
     </Container>
   )
