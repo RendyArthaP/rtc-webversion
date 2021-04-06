@@ -125,7 +125,6 @@ const Options = ({ children }) => {
                   Call
                 </Button>
               )}
-              {console.log(callUser)}
             </Grid>
           </Grid>
         </form>
