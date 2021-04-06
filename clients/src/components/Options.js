@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Options = ({ children }) => {
   const [idToCall, setIdToCall] = useState('')
+  const [waiting, setWaiting] = useState(false)
   const classes = useStyles()
   const {
     me,
@@ -48,6 +49,14 @@ const Options = ({ children }) => {
     leaveCall,
     callUser
   } = useContext(SocketContext)
+
+  const handleCall = (idToCall) => {
+    if(idToCall === "") {
+      alert('Please input your ID')
+    } else {
+      return callUser(idToCall)
+    }
+  }
 
   return (
     <Container className={classes.container}>
@@ -76,16 +85,20 @@ const Options = ({ children }) => {
                 onChange={(e) => setName(e.target.value)}
                 fullWidth
               />
-              <CopyToClipboard text={me} className={classes.margin}>
-                <Button 
-                  variant="contained" 
-                  color="primary" 
-                  fullWidth 
-                  startIcon={<Assignment fontSize="large"/>}
-                >
-                  Copy Your ID
-                </Button>
-              </CopyToClipboard>
+              {name === "" 
+                ? null
+                : 
+                <CopyToClipboard text={me} className={classes.margin}>
+                  <Button 
+                    variant="contained" 
+                    color="primary" 
+                    fullWidth 
+                    startIcon={<Assignment fontSize="large"/>}
+                  >
+                    Copy Your ID
+                  </Button>
+                </CopyToClipboard>
+              }
             </Grid>
             <Grid 
               item 
@@ -119,7 +132,7 @@ const Options = ({ children }) => {
                   color="primary" 
                   startIcon={<Phone fontSize="large"/>} 
                   fullWidth 
-                  onClick={() => callUser(idToCall)}
+                  onClick={() => handleCall(idToCall)}
                   className={classes.margin}
                 >
                   Call

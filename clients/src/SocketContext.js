@@ -104,6 +104,12 @@ const ContextProvider = ({ children }) => {
     window.location.reload()
   }
 
+  const declineCall = () => {
+    setCallEnded(true)
+    connectionRef.current.destroy()
+    window.location.reload()
+  }
+
   return (
     <SocketContext.Provider value={{
       stream,
@@ -117,7 +123,8 @@ const ContextProvider = ({ children }) => {
       userVideo,
       answerCall,
       callUser,
-      leaveCall
+      leaveCall,
+      declineCall
     }}>
       { children }
     </SocketContext.Provider>
