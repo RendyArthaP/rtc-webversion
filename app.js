@@ -14,7 +14,7 @@ const io = require("socket.io")(server, {
 app.use(cors());
 app.use(routes);
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
   socket.emit("me", socket.id);
 
   socket.on("disconnect", () => {
@@ -22,11 +22,11 @@ io.on("connection", socket => {
   });
 
   socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-    io.to(userToCall).emit("calluser", { signal: signalData, from, name });
+    io.to(userToCall).emit("callUser", { signal: signalData, from, name });
   });
 
-  socket.on("answerCall", data => {
-    io.to(data.to).emit("callAcepted", data.signal);
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal);
   });
 });
 
